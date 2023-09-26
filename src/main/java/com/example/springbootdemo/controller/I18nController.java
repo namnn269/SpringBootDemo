@@ -1,24 +1,18 @@
 package com.example.springbootdemo.controller;
 
-import com.fasterxml.jackson.annotation.JacksonInject;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.LocaleResolver;
 
-import java.text.NumberFormat;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -38,9 +32,17 @@ public class I18nController {
     }
 
     @GetMapping(value = "/resource-bundle")
-    public ResponseEntity<?> i18nResourceBundle(@RequestParam(value = "languageCode", defaultValue = "") String languageCode) {
+    public ResponseEntity<?> i18nResourceBundle(@RequestParam(value = "languageCode", defaultValue = "") String languageCode,
+                                                Locale locale) {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n/messages-common", Locale.forLanguageTag(languageCode));
         String res = String.format(resourceBundle.getString("hello.alo2"), "param 00", "param 11", "param 22");
+
+        ResourceBundle resourceBundle2 = ResourceBundle.getBundle("i18n/messages-common", locale);
+        String string = resourceBundle2.getString("hello.alo2");
+
+        Locale localeInContext = LocaleContextHolder.getLocale();
+        ResourceBundle resourceBundle3 = ResourceBundle.getBundle("i18n/messages-common", localeInContext);
+        String string3 = resourceBundle3.getString("hello.alo2");
 
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
