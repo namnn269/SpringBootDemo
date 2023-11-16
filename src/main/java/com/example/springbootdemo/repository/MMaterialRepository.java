@@ -22,6 +22,8 @@ import java.util.Map;
 @Repository
 public interface MMaterialRepository extends JpaRepository<MMaterial, Integer> {
 
+    long countBySystemUserCodeAndMaterialCode(String systemUserCode, String materialCode);
+
     @Lock(LockModeType.PESSIMISTIC_READ)
     @QueryHints(@QueryHint(name = "jakarta.persistence.lock.timeout", value = "0"))
     @Transactional

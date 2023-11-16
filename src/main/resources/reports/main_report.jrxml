@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="main_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6a5a66d4-1757-4891-832e-2a41f223524a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="ListDataSet" uuid="2335bb73-7676-4692-a191-65c5f37b133a">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="name" class="java.lang.String"/>
+		<field name="age" class="java.lang.Integer"/>
+		<field name="id" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="supplierName" class="java.lang.String"/>
+	<parameter name="listDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="listDataSource2" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="pieChartDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReportDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subReportParams" class="java.util.Map"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="age" class="java.lang.Integer"/>
+	<field name="dob" class="java.time.LocalDate"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement mode="Opaque" x="10" y="20" width="100" height="30" uuid="d8504f33-d4cf-4459-a2e7-f183c549e531"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Main report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="240" y="20" width="130" height="30" uuid="0fc25560-d05b-4a8e-9881-1292b1bb885d"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{supplierName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="20" width="130" height="30" uuid="7b07ff1a-d5ef-4a86-b557-3a68fda7af1c"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{supplierName}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="130" y="10" width="60" height="60" uuid="30634671-ad22-4399-8c19-94cc0a48a42d"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$P{supplierName}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="390" y="20" width="130" height="20" uuid="433c2e32-7a65-47e5-ac4d-6997cbc017ff"/>
+				<textFieldExpression><![CDATA[$F{dob}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="20" y="4" width="30" height="20" forecolor="#F1F748" backcolor="#F21326" uuid="de7dadd6-4b43-4107-ae68-9173e45e0dc9"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="50" y="4" width="140" height="20" forecolor="#F1F748" backcolor="#F21326" uuid="f7dc9db9-8c60-4250-8e0c-40b649787dbf"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="190" y="4" width="70" height="20" forecolor="#F1F748" backcolor="#F21326" uuid="deef03d0-9a65-49f2-aaf6-36fd2df0ae3b"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Age]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="260" y="4" width="130" height="20" forecolor="#F1F748" backcolor="#F21326" uuid="bc60cfe1-d70c-4b8d-8bfb-eb7cbb5b0501"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[DoB]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="0" width="30" height="20" uuid="d1c5e466-0838-4b3b-9ab9-00a68a9aa7fb"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="0" width="140" height="20" uuid="5400ceed-cbe7-4488-b008-35bfe908e5e8"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="0" width="130" height="20" uuid="6ad07b5f-df0c-4e76-9bf3-85b659610035"/>
+				<textFieldExpression><![CDATA[$F{dob}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="70" height="20" uuid="81e53e95-bdb9-484d-8825-a5b17c2d824d"/>
+				<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="390" y="0" width="165" height="20" uuid="ea255674-f681-43dd-b655-cc6b789659fd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="ListDataSet" uuid="0f9c8dd2-118f-469f-a2c4-345c4b796376">
+						<dataSourceExpression><![CDATA[$P{listDataSource}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="165">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="31b73630-eba3-4c8c-998e-04e397feaa82"/>
+							<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="60" y="0" width="105" height="20" uuid="123a3ca8-154b-49d7-8e29-96269b7c82f8"/>
+							<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="227" y="4" width="100" height="20" uuid="7dd58274-5670-4d9c-a56f-6e256d15485e"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{REPORT_COUNT} + " - " + $V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="4" width="130" height="20" uuid="7c40c533-bd00-4e5e-a19b-a46b63c8c220"/>
+				<textFieldExpression><![CDATA[$F{dob}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="233" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="310" y="20" width="200" height="200" uuid="54a0ed07-2203-4e99-bb63-6358f83591f4"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="ListDataSet" uuid="634c1eb2-0c0c-4883-8e13-1db97b24a456">
+							<dataSourceExpression><![CDATA[$P{pieChartDataSource}]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[$F{name}]]></keyExpression>
+					<valueExpression><![CDATA[$F{age}]]></valueExpression>
+					<labelExpression><![CDATA["label: "+$F{age}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<componentElement>
+				<reportElement x="10" y="20" width="184" height="20" uuid="14652d27-0953-491f-aadb-be20304752d9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="ListDataSet" uuid="e9d69637-05a0-41e6-8f8c-3ff908950381">
+						<dataSourceExpression><![CDATA[$P{listDataSource2}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="184">
+						<textField>
+							<reportElement x="50" y="0" width="60" height="20" uuid="12eb84a0-142f-45e9-a912-1315753984e1"/>
+							<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="110" y="0" width="74" height="20" uuid="8c5cbe80-73f8-4ce8-80c6-1e6389dd582e"/>
+							<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="0" width="50" height="20" uuid="d74f69d4-a6e8-4420-a698-03b10891a460"/>
+							<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<subreport>
+				<reportElement x="10" y="45" width="280" height="166" uuid="62b98a70-fee1-42f1-a07c-8d54213d4863"/>
+				<parametersMapExpression><![CDATA[$P{subReportParams}]]></parametersMapExpression>
+				<dataSourceExpression><![CDATA[$P{subReportDataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

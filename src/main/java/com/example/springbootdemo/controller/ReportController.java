@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/report")
@@ -19,5 +20,10 @@ public class ReportController {
     @GetMapping(value = "/{format}")
     public ResponseEntity<?> report(@PathVariable("format") String format) throws JRException, FileNotFoundException {
         return new ResponseEntity<>(reportService.exportEmployeeReport(format), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/complexity")
+    public ResponseEntity<?> report2(@RequestParam("format") String format) throws JRException, IOException {
+        return new ResponseEntity<>(reportService.exportReport(), HttpStatus.OK);
     }
 }
