@@ -54,4 +54,13 @@ public class MMaterialByVendor {
 
     @Column(name = "f_delete")
     private Integer fDelete = 0;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns(value = {
+            @JoinColumn(name = "system_user_code", referencedColumnName = "system_user_code", insertable = false, updatable = false),
+            @JoinColumn(name = "warehouse_group_code", referencedColumnName = "warehouse_group_code", insertable = false, updatable = false),
+            @JoinColumn(name = "material_code", referencedColumnName = "material_code", insertable = false, updatable = false)}
+    )
+    private MMaterial material;
+
 }

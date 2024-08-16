@@ -16,8 +16,8 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestControllerAdvice
-@Order(Ordered.HIGHEST_PRECEDENCE)
+//@RestControllerAdvice
+//@Order(Ordered.HIGHEST_PRECEDENCE)
 public class HandleException {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

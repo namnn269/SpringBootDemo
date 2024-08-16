@@ -1,55 +1,58 @@
 package com.example.springbootdemo.controller;
 
-import com.example.springbootdemo.dto.Customer;
-import com.example.springbootdemo.dto.UserDto;
-import com.example.springbootdemo.service.AnnotationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import com.example.springbootdemo.dto.AopParam;
+import com.example.springbootdemo.repository.MMaterialRepository;
+import com.example.springbootdemo.service.impl.AopService;
+import com.example.springbootdemo.service.impl.AopServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/aop")
 public class AopController {
 
-    @Autowired
-    private AnnotationService annotationService;
+    private final AopServiceImpl aopService;
+    private final AopService iAopService;
+    private final MMaterialRepository materialRepo;
 
-    @GetMapping
-    public ResponseEntity<?> get(@RequestParam(name = "id", defaultValue = "1") int id,
-                                 @RequestParam(name = "name", defaultValue = "default customer") String name) {
-        if (id == 10) throw new RuntimeException("in get method, no customer having id equals to 10");
-        Customer customer = new Customer(id, name + " " + id);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+
+    public AopController(
+            @Qualifier("aopServiceConcreteImpl") AopServiceImpl aopServiceConcrete,
+            @Qualifier("aopServiceImpl") AopServiceImpl aopService,
+            @Qualifier("aopServiceImpl") AopService iAopService,
+            MMaterialRepository materialRepo) {
+        this.aopService = aopServiceConcrete;
+        this.iAopService = iAopService;
+        this.materialRepo = materialRepo;
     }
 
-    @GetMapping(value = "/around1")
-    public ResponseEntity<?> around1(@RequestParam(defaultValue = "1") int id,
-                                     @RequestParam(defaultValue = "customer") String name) {
-        if (id == 10) throw new RuntimeException("in around method 1, no customer having id equals to 10");
-        Customer customer = new Customer(id, name + " " + id);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+    @GetMapping("/execute")
+    public Object execute(@RequestParam(defaultValue = "1") int id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("override interface", aopService.executeOverrideInterface(id));
+        map.put("default interface", aopService.executeDefaultInInterface(id));
+        map.put("override default interface", aopService.executeOverrideDefaultInInterface(id));
+        map.put("override common abstract", aopService.executeCommonMethod(id));
+        map.put("normal common abstract", aopService.executeNormalCommonMethod(id));
+        map.put("common interface", aopService.executeCommonInterface(id));
+        map.put("common default interface", aopService.executeCommonDefaultInterface(id));
+        map.put("normal", aopService.executeNormalMethodInClass(id));
+        map.put("override abstract", aopService.executeOverrideAbstract(id));
+        map.put("normal abstract", aopService.executeNormalInAbstract(id));
+        map.put("override normal abstract", aopService.executeOverrideNormalInAbstract(id));
+        map.put("do anno args class", aopService.doAnnoArgsInClass(1, new AopParam(id, "namnn"), new AopParam(), "namnn2"));
+        map.put("do args class", aopService.doArgsInClass(1, new AopParam(), "namnn2"));
+        map.put("do annotation on method", aopService.doAnnotationOnMethod(id));
+        map.put("method in repo", materialRepo.countBySystemUserCodeAndMaterialCode("01", "M001"));
+        map.put("method in super repo", materialRepo.count());
+        return map;
     }
 
-    @GetMapping(value = "/around2")
-    public ResponseEntity<?> around2(@RequestParam(defaultValue = "1") int id,
-                                     @RequestParam(defaultValue = "customer") String name,
-                                     @RequestParam(defaultValue = "0") int age) {
-        if (id == 10) throw new RuntimeException("in around method 2, no customer having id equals to 10");
-        Customer customer = new Customer(id, name + " " + id, age);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/annotation")
-    public ResponseEntity<?> annotation(@RequestParam(defaultValue = "1") int id) {
-        return new ResponseEntity<>(annotationService.get(id), HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<?> post(@RequestBody UserDto form,
-                                  @RequestParam String size,
-                                  @RequestParam String address) {
-        return new ResponseEntity<>(form, HttpStatus.OK);
-    }
 
 }

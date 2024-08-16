@@ -1,0 +1,14 @@
+hello ${name}
+
+<#list list as el>
+${el} ${el?index+1}
+</#list>
+
+${map.name} -> ${map.age} -> ${map.name}
+
+<#if map.name ? has_content>
+111
+<#else>
+222
+</#if>
+

@@ -10,14 +10,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class ValidatorInDB implements ConstraintValidator<CountCompareDB, Integer> {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public ValidatorInDB(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
 
     @Override
     public boolean isValid(Integer valueInForm, ConstraintValidatorContext context) {
-        if (userRepository == null) userRepository = BeanFactory.getBean(UserRepository.class);
 
-        Long numberOfUserInDB = userRepository.count();
+        Long numberOfUserInDB = userRepository != null ? 1L : 0L;
 
         System.out.printf("count user in DB: %s\n", numberOfUserInDB);
 

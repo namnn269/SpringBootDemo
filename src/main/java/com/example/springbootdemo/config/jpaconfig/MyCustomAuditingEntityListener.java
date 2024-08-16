@@ -4,15 +4,17 @@ import com.example.springbootdemo.entity.BaseEntity;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-@Component
+//@Component
 public class MyCustomAuditingEntityListener {
 
     private final AuditorAware<Integer> auditorAware;
+    private AuditingEntityListener auditingEntityListener;
 
     public MyCustomAuditingEntityListener(AuditorAware<Integer> auditorAware) {
         this.auditorAware = auditorAware;

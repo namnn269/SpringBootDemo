@@ -7,6 +7,10 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.LinkRelation;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +28,11 @@ public class TimeController {
     @GetMapping("/instant")
     public ResponseEntity<?> instant(@RequestBody MyTime time) {
         System.out.println(time);
-        return ResponseEntity.ok().body(time);
+        WebMvcLinkBuilder builder = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).dateFormatBody(new DateForm()));
+        EntityModel<Object> res = EntityModel.of(time,
+                builder.withRel("test-link-1"),
+                Link.of("test-link-3","lol-link"));
+        return ResponseEntity.ok().body(res);
     }
 
     @PostMapping(value = "/date-body")

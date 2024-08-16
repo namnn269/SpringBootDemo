@@ -3,7 +3,13 @@ package com.example.springbootdemo.service;
 import com.example.springbootdemo.dto.ReportDto;
 import com.example.springbootdemo.entity.Employee;
 import com.example.springbootdemo.repository.EmployeeRepository;
+import net.sf.jasperreports.components.list.FillDatasetRun;
+import net.sf.jasperreports.data.ds.DataSourceDataAdapterImpl;
+import net.sf.jasperreports.data.ds.DataSourceDataAdapterService;
+import net.sf.jasperreports.data.provider.DataSourceProviderDataAdapterImpl;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.base.JRBaseDataset;
+import net.sf.jasperreports.engine.data.JRAbstractBeanDataSourceProvider;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -26,7 +32,7 @@ public class ReportService {
     @Autowired
     private EmployeeRepository employeeRepo;
 
-    final String path = "C:\\Users\\Nam\\Desktop";
+    final String path = "/Users/namnn/Desktop";
 
     public String exportEmployeeReport(String format) throws FileNotFoundException, JRException {
 
@@ -46,7 +52,7 @@ public class ReportService {
     }
 
     public Object exportReport() throws IOException, JRException {
-        String s = "\\lol.pdf";
+        String s = "/lol.pdf";
         JasperReport report = JasperCompileManager.compileReport(new ClassPathResource("reports/main_report.jrxml").getInputStream());
         JasperReport subReport = JasperCompileManager.compileReport(new ClassPathResource("reports/sub_report.jrxml").getInputStream());
 

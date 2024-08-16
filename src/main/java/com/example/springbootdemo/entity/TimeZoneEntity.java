@@ -2,6 +2,7 @@ package com.example.springbootdemo.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class TimeZoneEntity {
     private LocalDateTime localDateTime;
     //  '['VV']'    '['z']'    '['zz']'    '['zzz']'    '['zzzz']'
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'['VV']'") // req: +09:00 or Asia/Tokyo ; res: Asia/Tokyo
+    @NotNull(message = "plp")
     private ZonedDateTime zonedDateTimeVV;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'['XXX']'") // req: only +09:00 ; res: +09:00
     private ZonedDateTime zonedDateTimeXXX;

@@ -1,170 +1,150 @@
 package com.example.springbootdemo.aop;
 
-import com.example.springbootdemo.annotation.MyMethodAnnotation;
-import com.example.springbootdemo.dto.Customer;
+import com.example.springbootdemo.dto.AopDto;
+import com.example.springbootdemo.dto.AopParam;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.*;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
 
 @Aspect
 @Component
 @Slf4j
 public class LoggingAspect {
 
-    private List<Object> objects;
-
-    @Pointcut("execution(* com.example.springbootdemo.controller.AopController.get(..))")
-    public void loggingPointcut() {
+    // pointcut trên abstract, interface đều có tác dụng với class con mặc dù class con ở package khác
+    // với point cut trên abstract, interface thì chỉ áp dụng cho method trong abstract, interface đó và ABSTRACT METHOD trên các lớp cha
+    // với point cut trên class chỉ áp dụng cho method trong chính class đó
+    @Pointcut(value = """
+            execution(* com.example.springbootdemo.service.impl.AopService.ex*(..))
+            && args(i)
+            """, argNames = "i")
+    public void executionPointCut(int i) {
     }
 
-    @Pointcut("execution(* com.example.springbootdemo.controller.AopController.ar*(int, String, *))")
-    public void aroundPointcut1() {
+    // KHÔNG áp dụng cho interface, abstract class khi chỉ có abstract
+    // point cut trên concrete class sẽ khớp với method trong class này và các lớp cha trong CÙNG PACKAGE
+    @Pointcut(value = """
+            within(com.example.springbootdemo.service.AopSe*)
+            """)
+    public void withinPointCut() {
     }
 
-    @Pointcut("execution(* com.example.springbootdemo.controller.AopController.ar*(int, String, ..))")
-    public void aroundPointcut2() {
+    // annotation có trên interface, abstract class, concrete class đều được, NHƯNG
+    // annotate trên abstract, concrete chỉ có tác dụng với method được THỰC THI trên chính concrete, abstract đó
+    // annotate trên @Repository chỉ có tác dụng cho method được KHAI BÁO trong repo đó
+    @Pointcut(value = """
+            @within(com.example.springbootdemo.annotation.MyAnnotationOnClass)
+            """)
+//            OR
+//            @within(org.springframework.stereotype.Repository)
+    public void annoWithinPointCut() {
     }
 
-    @Pointcut("@annotation(com.example.springbootdemo.annotation.MyMethodAnnotation)")
-    public void annotationPointcut() {
+    // dùng được với cả class, abstract
+    // có tác dụng với tất cả method trên class implement và super, abstract, các interface của class impl đó
+    // TRỪ các body method trên interface, abstract, super và class nhánh khác
+    @Pointcut(value = """
+            this(org.springframework.data.jpa.repository.JpaRepository)
+            """)
+//            this(org.springframework.data.jpa.repository.JpaRepository)
+    public void thisPointCut() {
     }
 
-    @Pointcut("execution(* com.example.springbootdemo.controller.AopController.*(..)) " +
-            "&& @annotation( org.springframework.web.bind.annotation.PostMapping))")
-    public void postMappingPointCut() {
+    // dùng được với cả class, abstract
+    // có tác dụng với tất cả method trên class implement và super, abstract, các interface của class impl đó
+    @Pointcut(value = """
+            target(org.springframework.data.jpa.repository.JpaRepository)
+            """)
+    public void targetPointCut() {
     }
 
-    @Before(value = "postMappingPointCut()")
-    public void beforePostMapping(JoinPoint joinPoint) {
-        objects = Arrays.stream(joinPoint.getArgs()).toList();
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        String[] parameterNames = methodSignature.getParameterNames();
-
-        System.out.println(objects);
-        System.out.println(Arrays.toString(parameterNames));
-
-        String value = null;
-        for (int i = 0; i < parameterNames.length; i++) {
-            if (parameterNames[i].equals("address")) {
-                value = (String) objects.get(i);
-                System.out.println("in param");
-                break;
-            } else {
-                try {
-                    Field field = objects.get(i).getClass().getDeclaredField("address");
-                    field.setAccessible(true);
-                    value = (String) field.get(objects.get(i));
-                    System.out.println("in form");
-                    break;
-                } catch (NoSuchFieldException | IllegalAccessException ignored) {
-                }
-            }
-        }
-        System.out.println(value);
-
-        System.out.println("//////////////////////////");
+    // chỉ dùng mỗi @target() dễ lỗi
+    // KHÔNG có tác dụng trên abstract
+    // chỉ dùng trên concrete, áp dụng cho tất cả method trên concrete và super, abstract
+    @Pointcut(value = """
+            @target(com.example.springbootdemo.annotation.MyAnnotationOnClass)
+            &&
+            within(com.example.springbootdemo..*)
+            """)
+    public void annoTargetPointCut() {
     }
 
-    @AfterReturning(value = "postMappingPointCut()")
-    public void afterPostMapping(JoinPoint joinPoint) {
-        Signature signature = joinPoint.getSignature();
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        System.out.println(Arrays.toString(joinPoint.getArgs()));
+    // áp dụng cho tất cả các method của bean có param khớp point cut, kể cả các method default của abstract super
+    @Pointcut(value = """
+            args(*,param,*)
+            &&
+            within(com.example.springbootdemo..*))
+            """)
+    public void argsPointCut(AopDto param) {
     }
 
-    @Before(value = "annotationPointcut()")
-    public void annotation(JoinPoint joinPoint) throws NoSuchMethodException {
-        Annotation annotation =
-                joinPoint.getTarget().getClass()
-                        .getMethod("get", int.class)
-                        .getAnnotation(MyMethodAnnotation.class);
-        log.warn(annotation + "");
-        log.warn(joinPoint.getSignature().toString());
+    // anno có thể đặt trên abstract
+    @Pointcut(value = """
+            @args(*,
+                  com.example.springbootdemo.annotation.AopArgs,
+                  com.example.springbootdemo.annotation.AopArgs,
+                  ..)
+            &&
+            within(com.example.springbootdemo..*)
+            """)
+    public void annoArgsPointCut() {
     }
 
-    @Order(0)
-    @AfterReturning(value = "annotationPointcut()", returning = "customer")
-    public Object annotationAfterReturn(JoinPoint joinPoint, Customer customer) {
-        System.out.println(customer);
-        customer.setName("fixed in aop");
-        customer.setId(999);
-        log.warn(Arrays.toString(joinPoint.getArgs()));
-        return customer;
+    // tác dụng trên method được annotated trên concrete, và method được THỰC THI trên abstract, super
+    @Pointcut(value = "@annotation(com.example.springbootdemo.annotation.MyAnnotationOnMethod)")
+    public void annotationPointCut() {
     }
 
-    @Around(value = "aroundPointcut1()")
-    public Object around1(ProceedingJoinPoint joinPoint) {
-        Object object = null;
-        try {
-            object = joinPoint.proceed();
+    // ====================================================================================
+    // ====================================================================================
+    // ====================================================================================
 
-        } catch (Throwable e) {
-            log.error(e.getMessage());
-        }
-        log.info("in around 1 advise, object = " + object);
-        if (object instanceof ResponseEntity<?> response) {
-            Customer customer = (Customer) response.getBody();
-            assert customer != null;
-            customer.setName(customer.getName() + " fixed 1");
-            response = new ResponseEntity<>(customer, HttpStatus.CREATED);
-            return response;
-        }
-        return object;
+
+    // @Before(value = "executionPointCut(i)", argNames = "joinPoint,i")
+    public void beforeExecution(JoinPoint joinPoint, int i) {
+        System.out.println("AOP execution ==> " + i + " ==> " + joinPoint);
     }
 
-    @Around(value = "aroundPointcut2()")
-    public Object around2(ProceedingJoinPoint joinPoint) throws Throwable {
-        Object object = joinPoint.proceed();
-        log.info("in around 2 advise, object = " + object);
-        if (object instanceof ResponseEntity<?> response) {
-            Customer customer = (Customer) response.getBody();
-            assert customer != null;
-            customer.setName(customer.getName() + " fixed 2");
-            response = new ResponseEntity<>(customer, HttpStatus.NOT_FOUND);
-            return response;
-        }
-        return object;
+    //    @Before(value = "withinPointCut()", argNames = "joinPoint")
+    public void beforeWith(JoinPoint joinPoint) {
+        System.out.println("AOP within ==> " + joinPoint);
     }
 
-    @Before(value = "loggingPointcut()")
-    public void beforeLogging(JoinPoint joinPoint) {
-        log.info("--> " + joinPoint.getSignature().toLongString());
-        log.info("--> " + joinPoint.getSignature().toString());
-        log.info("--> " + joinPoint.getSignature().toShortString());
-        log.info(joinPoint.getKind());
-        log.info(Arrays.toString(joinPoint.getArgs()));
-        log.info(joinPoint.getTarget().toString());
-        log.info(joinPoint.getSourceLocation().toString());
+    //    @Before(value = "annoWithinPointCut()", argNames = "joinPoint")
+    public void beforeAnnoWith(JoinPoint joinPoint) {
+        System.out.println("AOP @within ==> " + joinPoint);
     }
 
-    @AfterReturning(value = "loggingPointcut()", returning = "customer")
-    public void afterReturnLogging(JoinPoint joinPoint, Object customer) {
-        log.info(joinPoint.getSignature().toLongString());
-        log.info("after return: " + customer);
-        System.out.println(customer.getClass().getSimpleName());
-        if (customer instanceof ResponseEntity<?> response) {
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-        }
+        @Before(value = "targetPointCut()", argNames = "joinPoint")
+    public void beforeTarget(JoinPoint joinPoint) {
+        System.out.println("AOP target ==> " + joinPoint);
     }
 
-    @AfterThrowing(value = "loggingPointcut()", throwing = "e")
-    public void afterThrowing(JoinPoint joinPoint, Exception e) {
-        log.info(joinPoint.getSignature().toLongString());
-        log.error("error, throwing::" + e.getMessage());
-        System.out.println(e.getClass().getSimpleName());
+    //    @Before(value = "annoTargetPointCut()", argNames = "joinPoint")
+    public void beforeAnnoTarget(JoinPoint joinPoint) {
+        System.out.println("AOP @target ==> " + joinPoint);
     }
 
+    //    @Before(value = "argsPointCut(aopParam)", argNames = "joinPoint,aopParam")
+    public void beforeArgs(JoinPoint joinPoint, AopDto aopParam) {
+        System.out.println("AOP arg ==> " + aopParam + " ==> " + joinPoint);
+    }
+
+    //    @Before(value = "annoArgsPointCut()", argNames = "joinPoint")
+    public void beforeAnnoArgs(JoinPoint joinPoint) {
+        System.out.println("AOP @arg ==> " + joinPoint);
+    }
+
+        @Before(value = "thisPointCut()")
+    public void beforeThisArgs(JoinPoint joinPoint) {
+        System.out.println("AOP this ==> " + joinPoint);
+    }
+
+//    @Before(value = "annotationPointCut()")
+    public void beforeAnnotation(JoinPoint joinPoint) {
+        System.out.println("AOP @annotation ==> " + joinPoint);
+    }
 }

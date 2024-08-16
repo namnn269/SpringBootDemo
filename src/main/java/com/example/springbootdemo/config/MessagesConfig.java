@@ -14,7 +14,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.MultiValueMapAdapter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -26,7 +25,8 @@ import java.util.List;
 import java.util.Locale;
 
 @Configuration
-public class MessagesConfig implements WebMvcConfigurer {
+public class MessagesConfig {
+
 
     @Bean
     public MessageSource messageSource() {
@@ -52,42 +52,56 @@ public class MessagesConfig implements WebMvcConfigurer {
 //        CookieLocaleResolver localeResolver = new CookieLocaleResolver("lang-cookie");
 //        localeResolver.setCookieMaxAge(Duration.of(1000, ChronoUnit.SECONDS));
 
-        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
+//        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
 
-//        CustomHeaderLocaleResolver localeResolver = new CustomHeaderLocaleResolver();
-//        localeResolver.setDefaultLocale(Locale.FRANCE);
-//        localeResolver.setHeaderName("lang-header");
+        CustomHeaderLocaleResolver localeResolver = new CustomHeaderLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.FRANCE);
+        localeResolver.setHeaderName("lang-header");
         return localeResolver;
     }
 
     // only for sessionLocaleResolver
-    @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("language123");
-        return localeChangeInterceptor;
-    }
+//    @Bean // no need as a bean
+//    public LocaleChangeInterceptor localeChangeInterceptor() {
+//        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+//        localeChangeInterceptor.setParamName("language123");
+//        return localeChangeInterceptor;
+//    }
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(localeChangeInterceptor());
+//        WebMvcConfigurer.super.addInterceptors(registry);
+//    }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localeChangeInterceptor());
-        WebMvcConfigurer.super.addInterceptors(registry);
+    // to custom header when using header for i18n
+    public static class CustomHeaderLocaleResolver extends AcceptHeaderLocaleResolver {
+        private String headerName = "Accept-Language";
+
+        public CustomHeaderLocaleResolver() {
+        }
+
+        public CustomHeaderLocaleResolver(String headerName) {
+            this.headerName = headerName;
+        }
+
+        public void setHeaderName(String headerName) {
+            this.headerName = headerName;
+        }
+
+        @Override
+        public Locale resolveLocale(HttpServletRequest request) {
+            String langHeader = request.getHeader(headerName);
+            System.out.println("in config: " + request.getLocale());
+            if (langHeader != null && !langHeader.isBlank())
+                return Locale.forLanguageTag(langHeader);
+            return super.resolveLocale(request);
+        }
+
+        @Override
+        public void setLocale(HttpServletRequest request, HttpServletResponse response, Locale locale) {
+            System.out.println("setting locale header");
+        }
     }
 }
 
-// to custom header when using header for i18n
-class CustomHeaderLocaleResolver extends AcceptHeaderLocaleResolver {
-    private String headerName = "Accept-Language";
-
-    public void setHeaderName(String headerName) {
-        this.headerName = headerName;
-    }
-
-    @Override
-    public Locale resolveLocale(HttpServletRequest request) {
-        String langHeader = request.getHeader(headerName);
-        System.out.println("in config: " + request.getLocale());
-        if (langHeader != null && !langHeader.isBlank()) return Locale.forLanguageTag(langHeader);
-        return super.resolveLocale(request);
-    }
-}

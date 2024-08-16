@@ -1,10 +1,11 @@
 package com.example.springbootdemo.dto;
 
-import jakarta.annotation.Nonnull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 
-import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
 

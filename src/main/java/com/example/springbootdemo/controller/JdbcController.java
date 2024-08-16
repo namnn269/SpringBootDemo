@@ -1,5 +1,6 @@
 package com.example.springbootdemo.controller;
 
+import com.example.springbootdemo.dto.MaterialDto_1;
 import com.example.springbootdemo.dto.MaterialDto_2;
 import com.example.springbootdemo.entity.Employee;
 import com.example.springbootdemo.repository.MMaterialRepository;
@@ -156,10 +157,15 @@ public class JdbcController {
     public Object jpaWithOrderNull(
             @RequestParam(required = false, defaultValue = "ASC") String order,
             @RequestBody List<Integer> ids) {
-        String sql = " SELECT mm.recordId, mm.materialCode, mm.materialName, mm.supplierCode " +
+
+        String sql = " SELECT new com.example.springbootdemo.dto.MaterialDto_2(" +
+                "   mm.materialCode AS materialCodexx, " +
+                "   mm.materialName AS materialNamexx, " +
+                "   mm.supplierCode AS supplierCodexx," +
+                "   mm.remarks AS vendorCodexx) " +
                 " FROM MMaterial mm " +
                 " WHERE mm.recordId IN (:ids) " +
-                " ORDER BY NULL, mm.recordId " + order;
+                " ORDER BY materialNamexx DESC, materialCodexx ASC, mm.recordId " + order;
         Query nativeQuery = entityManager.createQuery(sql);
         nativeQuery.setParameter("ids", ids.isEmpty() ? null : ids);
         List<Map<String, Object>> resultList = nativeQuery.getResultList();

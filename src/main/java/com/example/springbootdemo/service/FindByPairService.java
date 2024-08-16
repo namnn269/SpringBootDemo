@@ -85,9 +85,11 @@ public class FindByPairService {
 
     public Object getSubQueryJpa() {
         String sql = " SELECT new com.example.springbootdemo.service.MaterialDtoVendor" +
-                " ( mmbv.materialCode, mm.materialName, COALESCE(mm.supplierCode,  mm.materialName, 'papapapaa'), " +
-                " ROW_NUMBER() OVER(PARTITION BY mm.supplierCode ORDER BY mm.materialCode )," +
-                " mmbv.materialVendorCode )  " +
+                " ( mmbv.materialCode, " +
+                "   mm.materialName, " +
+                "   COALESCE(mm.supplierCode,  mm.materialName, 'papapapaa'), " +
+                "   ROW_NUMBER() OVER(PARTITION BY mm.supplierCode ORDER BY mm.materialCode )," +
+                "   mmbv.materialVendorCode )  " +
                 " FROM " +
                 "   (SELECT m.materialCode AS materialCode, m5.materialName AS materialName, m.supplierCode AS supplierCode " +
                 "   FROM MMaterial m " +

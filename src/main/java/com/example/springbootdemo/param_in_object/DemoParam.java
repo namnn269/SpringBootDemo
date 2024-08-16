@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @SupportsParameterResolution
 @Data
 public class DemoParam {
@@ -22,5 +24,7 @@ public class DemoParam {
     @NotBlank
     @NotEmpty
     private String address;
+
+    private LocalDate localDate;
 
 }

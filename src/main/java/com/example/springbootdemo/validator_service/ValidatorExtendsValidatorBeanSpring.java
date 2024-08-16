@@ -1,5 +1,8 @@
 package com.example.springbootdemo.validator_service;
 
+import jakarta.validation.ValidatorFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.FieldError;
@@ -10,7 +13,14 @@ import java.util.*;
 
 /* Nên sử dụng để có nhiều chi tiết hơn */
 @Service
+//@Primary
 public class ValidatorExtendsValidatorBeanSpring extends CustomValidatorBean {
+
+    @Override
+    @Autowired
+    public void setValidatorFactory(ValidatorFactory validatorFactory) {
+        super.setValidatorFactory(validatorFactory);
+    }
 
     public boolean hasError(Object target) {
         BeanPropertyBindingResult result = new BeanPropertyBindingResult(target, target.getClass().getName());

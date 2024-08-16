@@ -11,12 +11,12 @@ class CalculatorTest {
 
     @Test
     void tenPlusTenShouldBeTwenty() {
-        assertThat(cal.add(20, 10)).isEqualTo(40);
+        assertThat(cal.add(20, 20)).isEqualTo(40);
     }
 
     @Test
     void twoPlusThreeShouldBeFive() {
-        assertEquals(25, cal.add(2, 3));
+        assertEquals(5, cal.add(2, 3));
     }
 
     @Test

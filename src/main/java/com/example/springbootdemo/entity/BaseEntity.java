@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @MappedSuperclass
-@EntityListeners(MyCustomAuditingEntityListener.class)
+//@EntityListeners(MyCustomAuditingEntityListener.class)
 public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -56,8 +56,4 @@ public class JasperReportController {
 
         return new ResponseEntity<>("OK OK", HttpStatus.OK);
     }
-
-    public static void main(String[] args) {
-        System.out.println(new Date("02/02/2000"));
-    }
 }

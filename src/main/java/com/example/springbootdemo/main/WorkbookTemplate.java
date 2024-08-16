@@ -4,11 +4,11 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class WorkbookTemplate {
-    private final static Workbook sourceWorkbook;
-    private final static Font sourceHeaderFont;
-    private final static Font sourceFont;
+    private static final Workbook sourceWorkbook;
+    private static final Font sourceHeaderFont;
+    private static final Font sourceFont;
     private static final CellStyle sourceCellStyle;
-    private final static CellStyle sourceHeaderCellStyle;
+    private static final CellStyle sourceHeaderCellStyle;
 
     static {
         sourceWorkbook = new XSSFWorkbook();

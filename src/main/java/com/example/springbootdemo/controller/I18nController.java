@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
+import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +25,13 @@ public class I18nController {
     private MessageSource messageSource;
 
     @GetMapping
-    public ResponseEntity<?> i18n(@RequestParam(value = "languageCode", defaultValue = "") String languageCode) {
+    public ResponseEntity<?> i18n(
+            HttpServletRequest request,
+            @RequestParam(value = "languageCode", defaultValue = "") String languageCode) {
         Object[] params = new Object[]{"param 0", "param 1", "param 2"};
 //        String msg = messageSource.getMessage("hello.alo", params, "default message lol", Locale.forLanguageTag(languageCode));
+        LocaleContext localeContext = LocaleContextHolder.getLocaleContext();
+        Locale locale = localeContext.getLocale();
         String msg = messageSource.getMessage(new UserRegistrationMessage("nam", 20), Locale.forLanguageTag(languageCode));
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
@@ -66,7 +71,10 @@ public class I18nController {
 
         @Override
         public String[] getCodes() {
-            return new String[]{"user.registration.message3", "user.registration.message", "user.registration.message2"};
+            return new String[]{
+                    "user.registration.message3",
+                    "user.registration.message",
+                    "user.registration.message2"};
         }
 
         @Override
