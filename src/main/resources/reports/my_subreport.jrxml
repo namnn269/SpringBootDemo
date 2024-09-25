@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="my_subreport" pageWidth="200" pageHeight="500" columnWidth="190" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="7f322a74-cc3a-483f-928c-5f9e25919d7e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="name_subreport" class="java.lang.String"/>
+	<parameter name="map_subreport" class="java.util.Map">
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="line_number" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.javabean.field.property" value="lineNumber"/>
+	</field>
+	<field name="cell_value" class="java.lang.String">
+		<property name="net.sf.jasperreports.javabean.field.property" value="cellValue"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="4" y="0" width="100" height="30" uuid="4c662b46-0fc1-41e2-aa55-6d27bfa4b949"/>
+				<textFieldExpression><![CDATA[$P{name_subreport}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="30" width="100" height="30" uuid="a9a2ad99-6505-43bb-bc0f-06a1e7a661ca"/>
+				<textFieldExpression><![CDATA[$P{map_subreport}.getOrDefault("created_date",  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()))]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="0" width="60" height="30" uuid="b0716a6f-cd1e-40f3-9db8-702d387a72d4"/>
+				<text><![CDATA[STT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="0" width="100" height="30" uuid="cd8b8a03-0abd-4651-8dc5-5d228aa85617"/>
+				<text><![CDATA[Value]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<printWhenExpression><![CDATA[$F{line_number} % 2 != 0]]></printWhenExpression>
+			<textField>
+				<reportElement x="17" y="0" width="60" height="28" uuid="e8fa6be3-aedf-4282-b080-40f3f207238b"/>
+				<textFieldExpression><![CDATA[$F{line_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="0" width="100" height="28" uuid="24be0c19-e7b0-4643-b1b6-e07c042c3056"/>
+				<textFieldExpression><![CDATA[$F{cell_value}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

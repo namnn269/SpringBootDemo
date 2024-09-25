@@ -17,5 +17,5 @@ public @interface CountCompareDB {
 
     Class<? extends Payload>[] payload() default {};
 
-    String message() default "count must be greater than %d";
+    String message() default "{count.db}";
 }

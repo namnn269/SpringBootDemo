@@ -25,14 +25,19 @@ public class I18nController {
     private MessageSource messageSource;
 
     @GetMapping
-    public ResponseEntity<?> i18n(
-            HttpServletRequest request,
-            @RequestParam(value = "languageCode", defaultValue = "") String languageCode) {
+    public ResponseEntity<?> i18n(Locale locale) {
         Object[] params = new Object[]{"param 0", "param 1", "param 2"};
 //        String msg = messageSource.getMessage("hello.alo", params, "default message lol", Locale.forLanguageTag(languageCode));
         LocaleContext localeContext = LocaleContextHolder.getLocaleContext();
-        Locale locale = localeContext.getLocale();
-        String msg = messageSource.getMessage(new UserRegistrationMessage("nam", 20), Locale.forLanguageTag(languageCode));
+        String msg = messageSource.getMessage(new UserRegistrationMessage("nam", 20), locale);
+        return new ResponseEntity<>(msg, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/param")
+    public ResponseEntity<?> i18nParam(Locale locale, HttpServletRequest request, HttpServletResponse response) {
+        System.out.println(request.getHeader("Cookie"));
+        String msg = messageSource.getMessage("hello.alo.v2", null, locale);
+        response.setHeader("ok", "oklol");
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
@@ -52,14 +57,6 @@ public class I18nController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/param")
-    public ResponseEntity<?> i18nParam(Locale locale, HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(request.getHeader("Cookie"));
-        String msg = messageSource.getMessage("hello.alo", null, locale);
-        response.setHeader("ok", "oklol");
-        return new ResponseEntity<>(msg, HttpStatus.OK);
-    }
-
     static class UserRegistrationMessage implements MessageSourceResolvable {
         private final String username;
         private final int age;
@@ -73,8 +70,8 @@ public class I18nController {
         public String[] getCodes() {
             return new String[]{
                     "user.registration.message3",
-                    "user.registration.message",
-                    "user.registration.message2"};
+                    "user.registration.message.v2",
+                    "user.registration.message2.v2"};
         }
 
         @Override

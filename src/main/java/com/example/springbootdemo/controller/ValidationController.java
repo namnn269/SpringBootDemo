@@ -38,13 +38,6 @@ public class ValidationController {
         this.validator = validator;
         this.validatorFactory = validatorFactory;
     }
-//    @Autowired
-//    private ListFormValidator formValidator;
-//
-//    @InitBinder
-//    private void initBinder(WebDataBinder binder) {
-//        binder.addValidators(formValidator);
-//    }
 
     @PostMapping
     public Object validate(@RequestBody @Valid ValidForm form) {
@@ -92,6 +85,18 @@ public class ValidationController {
     @PostMapping("/custom-annotation")
     public Object post(@RequestBody ValidForm form) {
         return form;
+    }
+
+    @PostMapping("/with-i18n-message")
+    public Object validateWithMessage(@RequestBody ValidForm form) {
+        Set<ConstraintViolation<ValidForm>> validate = validator.validate(form, ValidForm.GroupClass1.class);
+        List<Map<String, String>> errors = validate
+                .stream()
+                .map(e -> Map.of(e.getPropertyPath().toString(), e.getMessage()))
+                .toList();
+
+        System.out.println(errors);
+        return errors;
     }
 
 }

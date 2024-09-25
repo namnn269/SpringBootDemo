@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="my_report" pageWidth="600" pageHeight="842" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="13f75f53-9f54-4106-8339-e997074fb2c5">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="style_1" mode="Transparent" forecolor="#1935B3" backcolor="#B8403E"/>
+	<style name="style_2" forecolor="#CA18DE" isBold="true"/>
+	<subDataset name="list_dataset" uuid="192ca528-fa39-4205-879d-17d5354ede2b">
+		<parameter name="size_of_list" class="java.lang.Integer"/>
+		<parameter name="map_of_list" class="java.util.Map">
+			<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="list_name" class="java.lang.String">
+			<property name="net.sf.jasperreports.javabean.field.property" value="listName"/>
+		</field>
+		<field name="list_age" class="java.lang.Integer">
+			<property name="net.sf.jasperreports.javabean.field.property" value="listAge"/>
+		</field>
+	</subDataset>
+	<subDataset name="chart_dataset" uuid="d488e31f-5566-40b0-8821-0de237cd5ce7">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="index1" class="java.lang.Integer"/>
+		<field name="index2" class="java.lang.Integer"/>
+		<field name="index3" class="java.lang.Integer"/>
+		<field name="label" class="java.lang.String"/>
+		<field name="category" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="pie_chart_dataset" uuid="42e9421a-1954-46f4-bae5-0cc1d99b43ce">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="index1" class="java.lang.Integer"/>
+		<field name="index2" class="java.lang.Integer"/>
+		<field name="index3" class="java.lang.Integer"/>
+		<field name="label" class="java.lang.String"/>
+		<field name="category" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="date_time" class="java.lang.String">
+		<property name="net.sf.jasperreports.javabean.field.property" value="dateTime"/>
+	</parameter>
+	<parameter name="map_param" class="java.util.Map">
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="image" class="java.io.InputStream"/>
+	<parameter name="_size_of_list" class="java.lang.Integer"/>
+	<parameter name="_map_of_list" class="java.util.Map"/>
+	<parameter name="_data_of_list" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="_subreport_source" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="_data_of_subreport" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="_map_of_subreport" class="java.util.Map"/>
+	<parameter name="_name_of_subreport" class="java.lang.String"/>
+	<parameter name="_spider_chart_data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="_pie_chart_data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="_bar_chart_data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="customer_name" class="java.lang.String">
+		<property name="net.sf.jasperreports.javabean.field.property" value="customerName"/>
+	</field>
+	<field name="customer_name2" class="java.lang.String">
+		<property name="net.sf.jasperreports.javabean.field.property" value="customerName2"/>
+	</field>
+	<field name="phone_number" class="java.lang.String">
+		<property name="net.sf.jasperreports.javabean.field.property" value="phoneNumber"/>
+	</field>
+	<field name="group_index" class="java.lang.String">
+		<property name="net.sf.jasperreports.javabean.field.property" value="groupIndex"/>
+	</field>
+	<field name="level_index" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.javabean.field.property" value="levelIndex"/>
+	</field>
+	<group name="group_level">
+		<groupExpression><![CDATA[$F{group_index}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<textField>
+					<reportElement x="190" y="0" width="150" height="30" uuid="1cc6c361-44c6-4472-8662-e7c3aed61ef6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["START GROUP: "+$F{group_index}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="35">
+				<textField>
+					<reportElement x="180" y="5" width="150" height="30" uuid="e2e2f2aa-17ae-4cdd-a90a-9789a92f6efe"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["END GROUP: "+$F{group_index}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="level">
+		<groupExpression><![CDATA[$F{level_index}]]></groupExpression>
+		<groupHeader>
+			<band height="34">
+				<textField>
+					<reportElement x="190" y="0" width="150" height="30" uuid="f8e71b31-6d98-4afc-80c5-f127470a828d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["START LEVEL: "+$F{level_index}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="36">
+				<textField>
+					<reportElement x="190" y="0" width="150" height="30" uuid="69fed6fd-c316-4c3c-ab7d-ccd6cf9bcc81"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["END LEVEL: "+$F{level_index}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement style="style_2" x="20" y="20" width="100" height="30" uuid="cb7de3e1-2b32-48f6-a86b-4b5f1f04a853"/>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="19" width="100" height="30" uuid="f70ca50e-ee9a-4b4e-9e05-f23f49264b70"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{date_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="20" width="100" height="30" uuid="4ba458bf-f11e-457c-bfc7-8b081ffff29d"/>
+				<textFieldExpression><![CDATA["map : " + $P{map_param}.getOrDefault("name", "namnn default")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="69" splitType="Stretch">
+			<textField>
+				<reportElement x="43" y="19" width="100" height="30" uuid="ccb622fc-255f-41ed-83a0-9f7ffc3d357c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="19" width="100" height="30" uuid="99cac3db-0320-4f84-8fb3-4b2ce9e90ebb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{customer_name2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="256" y="19" width="64" height="30" uuid="52b7b97e-0570-40e5-98e8-36f030cc6c05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{phone_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="19" width="100" height="30" uuid="ea2c2df2-f4ac-4cf6-803f-3299db740be0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{date_time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-9" y="19" width="49" height="30" uuid="ffa2845a-a0d2-41a4-8e36-c632a9aaec86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[HEADER]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="19" width="124" height="30" uuid="0f1681d7-9702-4713-8f25-4d34b54e66b8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{group_index} +" : "+$F{level_index}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="256" y="1" width="64" height="30" uuid="620dfccc-a5ed-4adb-aaa2-91a9358e3f74"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{phone_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style_1" x="43" y="1" width="100" height="30" uuid="ca3059e9-fa60-4340-8a16-f4edf65d20ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="1" width="100" height="30" uuid="8a7f78b9-f693-4c97-a625-f9cfde0803bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{date_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="1" width="100" height="30" uuid="5b3461dc-0efe-4b95-aa36-23d19e02d92c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{customer_name2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-10" y="2" width="51" height="30" uuid="ac6ca8ad-8772-493b-9387-4ea350a6fde1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[LOOP]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="1" width="124" height="30" uuid="5b314185-91b1-433b-84ab-4615acc33518"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{group_index} +":"+$F{level_index}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="16">
+			<rectangle>
+				<reportElement x="0" y="2" width="560" height="12" backcolor="#223CBD" uuid="5b3c9d5f-655b-4162-aadd-ecc476b709ef"/>
+			</rectangle>
+		</band>
+	</detail>
+	<summary>
+		<band height="693" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="660" width="280" height="30" uuid="2528e3e8-d6a5-42bb-8dac-a709bd8c94da"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="list_dataset" uuid="3c1f6f87-2a74-4ee9-b000-a2ccd8ff11c2">
+						<parametersMapExpression><![CDATA[$P{map_param}]]></parametersMapExpression>
+						<datasetParameter name="size_of_list">
+							<datasetParameterExpression><![CDATA[$P{_size_of_list}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="map_of_list">
+							<datasetParameterExpression><![CDATA[$P{_map_of_list}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{_data_of_list}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="280">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="30" uuid="66cc9ad9-4623-4ce3-9498-140273071411"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{list_name}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="60" y="0" width="60" height="30" uuid="61ffa2bf-5354-415e-a870-50805ca96762"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{list_age}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="120" y="0" width="100" height="30" uuid="ce4381d3-02a4-4c71-9046-6358afc4cb15"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$P{map_of_list}.getOrDefault("address", "default address")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="220" y="0" width="60" height="30" uuid="d71d3bca-ed94-4da6-9c8b-92e0dffed2fd"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA["size: "+$P{size_of_list}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<subreport>
+				<reportElement x="380" y="3" width="180" height="180" uuid="6a7a4af6-c00d-4521-b146-16c814073592"/>
+				<subreportParameter name="name_subreport">
+					<subreportParameterExpression><![CDATA[$P{_name_of_subreport}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="map_subreport">
+					<subreportParameterExpression><![CDATA[$P{_map_of_subreport}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{_data_of_subreport}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{_subreport_source}]]></subreportExpression>
+			</subreport>
+			<image>
+				<reportElement x="0" y="3" width="97" height="105" uuid="c55511b0-467b-43ef-b023-6aa485940376"/>
+				<imageExpression><![CDATA["image/image_1.png"]]></imageExpression>
+			</image>
+			<image onErrorType="Icon">
+				<reportElement x="140" y="3" width="106" height="105" uuid="ec90e999-701b-427b-a621-78f8940bc04a"/>
+				<imageExpression><![CDATA[$P{image}]]></imageExpression>
+			</image>
+			<componentElement>
+				<reportElement x="-2" y="196" width="182" height="184" uuid="0f49f0f6-b04c-4263-ac58-ed02ad5de2a9"/>
+				<sc:spiderChart xmlns:sc="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<sc:chartSettings>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</sc:chartSettings>
+					<sc:spiderDataset>
+						<dataset>
+							<datasetRun subDataset="chart_dataset" uuid="10762deb-d70f-41a3-b56e-d4e855a05718">
+								<dataSourceExpression><![CDATA[$P{_spider_chart_data}]]></dataSourceExpression>
+							</datasetRun>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{index1}]]></valueExpression>
+							<labelExpression><![CDATA[$F{label}]]></labelExpression>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA["SERIES 2"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{index2}]]></valueExpression>
+							<labelExpression><![CDATA[$F{label}]]></labelExpression>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA["SERIES 3"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{index3}]]></valueExpression>
+							<labelExpression><![CDATA[$F{label}]]></labelExpression>
+						</categorySeries>
+					</sc:spiderDataset>
+					<sc:spiderPlot isWebFilled="true"/>
+				</sc:spiderChart>
+			</componentElement>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="190" y="200" width="359" height="180" uuid="b26a7b0b-833f-4209-a18d-377201f236f7"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="chart_dataset" uuid="30733099-c2d5-4e62-b702-7a420cb5ec0a">
+							<dataSourceExpression><![CDATA[$P{_bar_chart_data}]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["index1"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{index1}]]></valueExpression>
+						<labelExpression><![CDATA[$F{label}]]></labelExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["index2"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{index2}]]></valueExpression>
+						<labelExpression><![CDATA[$F{label}]]></labelExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["index3"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{index3}]]></valueExpression>
+						<labelExpression><![CDATA[$F{label}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="3" y="390" width="180" height="183" uuid="5119ca22-0f88-415a-b6d7-9c6073c18d1a"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset maxCount="16" minPercentage="1.0">
+					<dataset>
+						<datasetRun subDataset="pie_chart_dataset" uuid="6102f936-b835-41da-bee3-9280be9c3d45">
+							<dataSourceExpression><![CDATA[$P{_pie_chart_data}]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+					<pieSeries>
+						<keyExpression><![CDATA[$F{category}]]></keyExpression>
+						<valueExpression><![CDATA[$F{index1}]]></valueExpression>
+						<labelExpression><![CDATA[$F{label}]]></labelExpression>
+					</pieSeries>
+					<pieSeries>
+						<keyExpression><![CDATA[$F{label}]]></keyExpression>
+						<valueExpression><![CDATA[$F{index2}]]></valueExpression>
+						<labelExpression><![CDATA[$F{category}]]></labelExpression>
+					</pieSeries>
+					<otherKeyExpression><![CDATA[]]></otherKeyExpression>
+					<otherLabelExpression><![CDATA[]]></otherLabelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

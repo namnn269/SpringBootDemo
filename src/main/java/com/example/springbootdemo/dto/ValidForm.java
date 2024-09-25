@@ -20,7 +20,7 @@ public class ValidForm {
     private Integer recordId;
 
     @NotNull(message = "Name must be not null :vvv")
-    @NotEmpty
+    @NotEmpty(message = "__{not.empty}", groups = GroupClass1.class)
     @StartString
     private String name;
     @NotNull(groups = GroupClass1.class, payload = Level1.class)
