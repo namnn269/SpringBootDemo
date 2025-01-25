@@ -1,6 +1,6 @@
 package com.example.springbootdemo.config.jpaconfig;
 
-import com.example.springbootdemo.entity.BaseEntity;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.BaseEntity;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import lombok.NoArgsConstructor;

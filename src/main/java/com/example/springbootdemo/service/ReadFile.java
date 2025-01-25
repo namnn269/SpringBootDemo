@@ -1,6 +1,5 @@
 package com.example.springbootdemo.service;
 
-import com.example.springbootdemo.entity.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;

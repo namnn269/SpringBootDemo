@@ -1,7 +1,7 @@
 package com.example.springbootdemo.controller;
 
-import com.example.springbootdemo.entity.TimeZoneEntity;
-import com.example.springbootdemo.repository.TimeZoneRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.TimeZoneEntity;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.TimeZoneRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,9 +11,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/timezone")

@@ -1,7 +1,7 @@
-package com.example.springbootdemo.repository;
+package com.example.springbootdemo.infrastructure.database.logicom.repository;
 
 import com.example.springbootdemo.dto.MMaterialByVendorDto;
-import com.example.springbootdemo.entity.MMaterialByVendor;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.MMaterialByVendor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

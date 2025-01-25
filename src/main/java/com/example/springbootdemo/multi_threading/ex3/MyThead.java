@@ -1,6 +1,6 @@
 package com.example.springbootdemo.multi_threading.ex3;
 
-import com.example.springbootdemo.entity.User;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.User;
 
 import java.util.concurrent.*;
 

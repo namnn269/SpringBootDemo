@@ -20,4 +20,14 @@ public class MaterialDto_2 {
 
     private Integer recordId2;
 
+    public MaterialDto_2(String materialCode,
+                         String materialName,
+                         String supplierCode,
+                         String vendorCode) {
+        this.materialCode = materialCode;
+        this.materialName = materialName;
+        this.supplierCode = supplierCode;
+        this.vendorCode = vendorCode;
+    }
+
 }

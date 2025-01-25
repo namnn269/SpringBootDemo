@@ -1,7 +1,6 @@
 package com.example.springbootdemo.controller;
 
-import com.example.springbootdemo.dto.MMaterialByVendorDto;
-import com.example.springbootdemo.repository.MMaterialByVendorRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.MMaterialByVendorRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

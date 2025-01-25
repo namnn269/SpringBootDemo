@@ -2,7 +2,7 @@ package com.example.springbootdemo.validate_annotation;
 
 import com.example.springbootdemo.annotation.valid_annotation.CountCompareDB;
 import com.example.springbootdemo.config.ZoneIdHolder;
-import com.example.springbootdemo.repository.UserRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext;

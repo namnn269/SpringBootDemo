@@ -1,6 +1,6 @@
 package com.example.springbootdemo.config;
 
-import com.example.springbootdemo.entity.Employee;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.Employee;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

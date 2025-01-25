@@ -1,8 +1,8 @@
 package com.example.springbootdemo.service;
 
 import com.example.springbootdemo.dto.UserDto;
-import com.example.springbootdemo.entity.User;
-import com.example.springbootdemo.repository.UserRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.User;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.UserRepository;
 import com.example.springbootdemo.utils.CheckFileType;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

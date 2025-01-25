@@ -1,7 +1,7 @@
 package com.example.springbootdemo.service;
 
-import com.example.springbootdemo.entity.MMaterial;
-import com.example.springbootdemo.repository.MMaterialRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.MMaterial;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.MMaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
-package com.example.springbootdemo.repository;
+package com.example.springbootdemo.infrastructure.database.logicom.repository;
 
-import com.example.springbootdemo.entity.TimeZoneEntity;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.TimeZoneEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

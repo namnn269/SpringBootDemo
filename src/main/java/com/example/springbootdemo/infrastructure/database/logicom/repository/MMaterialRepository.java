@@ -1,8 +1,8 @@
-package com.example.springbootdemo.repository;
+package com.example.springbootdemo.infrastructure.database.logicom.repository;
 
 import com.example.springbootdemo.dto.MaterialDto_1;
 import com.example.springbootdemo.dto.MaterialSearchDto;
-import com.example.springbootdemo.entity.MMaterial;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.MMaterial;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.QueryHint;
 import org.springframework.data.domain.Page;

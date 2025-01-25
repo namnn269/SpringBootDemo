@@ -1,4 +1,4 @@
-package com.example.springbootdemo.repository;
+package com.example.springbootdemo.infrastructure.database.logicom.repository;
 
 import org.springframework.data.jpa.repository.Query;
 

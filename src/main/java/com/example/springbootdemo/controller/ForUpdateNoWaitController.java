@@ -1,7 +1,7 @@
 package com.example.springbootdemo.controller;
 
-import com.example.springbootdemo.entity.MMaterial;
-import com.example.springbootdemo.repository.MMaterialRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.MMaterial;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.MMaterialRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;

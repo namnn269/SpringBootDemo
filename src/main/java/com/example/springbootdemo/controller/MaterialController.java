@@ -2,8 +2,7 @@ package com.example.springbootdemo.controller;
 
 import com.example.springbootdemo.dto.MaterialDto_2;
 import com.example.springbootdemo.dto.MaterialSearchDto;
-import com.example.springbootdemo.entity.MMaterial;
-import com.example.springbootdemo.repository.MMaterialRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.MMaterialRepository;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

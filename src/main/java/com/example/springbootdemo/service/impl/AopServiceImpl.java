@@ -2,9 +2,8 @@ package com.example.springbootdemo.service.impl;
 
 import com.example.springbootdemo.annotation.MyAnnotationOnMethod;
 import com.example.springbootdemo.dto.AopDto;
-import com.example.springbootdemo.dto.AopParam;
 import com.example.springbootdemo.dto.Customer;
-import com.example.springbootdemo.repository.MMaterialRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.MMaterialRepository;
 import com.example.springbootdemo.service.AnnotationDao;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;

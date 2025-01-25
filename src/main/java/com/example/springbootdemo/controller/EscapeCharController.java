@@ -1,6 +1,6 @@
 package com.example.springbootdemo.controller;
 
-import com.example.springbootdemo.repository.MMaterialRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.MMaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;

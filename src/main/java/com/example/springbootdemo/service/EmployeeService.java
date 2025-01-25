@@ -1,7 +1,7 @@
 package com.example.springbootdemo.service;
 
-import com.example.springbootdemo.entity.Employee;
-import com.example.springbootdemo.repository.EmployeeRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.Employee;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

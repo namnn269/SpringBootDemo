@@ -1,8 +1,8 @@
-package com.example.springbootdemo.repository;
+package com.example.springbootdemo.infrastructure.database.logicom.repository;
 
 import com.example.springbootdemo.dto.ReqParam;
 import com.example.springbootdemo.dto.UserDtoResponse;
-import com.example.springbootdemo.entity.User;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

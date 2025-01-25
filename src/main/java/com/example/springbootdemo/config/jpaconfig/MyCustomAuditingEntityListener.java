@@ -1,11 +1,10 @@
 package com.example.springbootdemo.config.jpaconfig;
 
-import com.example.springbootdemo.entity.BaseEntity;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.BaseEntity;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

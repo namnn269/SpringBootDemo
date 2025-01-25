@@ -1,7 +1,7 @@
 package com.example.springbootdemo.validate_annotation;
 
 import com.example.springbootdemo.annotation.valid_annotation.MaxListSize;
-import com.example.springbootdemo.repository.UserRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;

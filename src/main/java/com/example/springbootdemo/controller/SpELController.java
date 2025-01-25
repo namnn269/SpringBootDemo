@@ -2,21 +2,14 @@ package com.example.springbootdemo.controller;
 
 import com.example.springbootdemo.dto.MaterialSearchDto;
 import com.example.springbootdemo.dto.ReqParam;
-import com.example.springbootdemo.entity.User;
-import com.example.springbootdemo.repository.MMaterialRepository;
-import com.example.springbootdemo.repository.TimeZoneRepository;
-import com.example.springbootdemo.repository.UserRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.MMaterialRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.TimeZoneRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.UserRepository;
 import com.example.springbootdemo.validator_service.ValidatorExtendsValidatorBeanSpring;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.sqm.tree.select.SqmSelectStatement;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.query.JpaQueryCreator;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

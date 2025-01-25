@@ -1,7 +1,6 @@
 package com.example.springbootdemo.service;
 
 import com.example.springbootdemo.dto.MMaterialDto;
-import com.example.springbootdemo.entity.MMaterial;
 import com.example.springbootdemo.utils.MyPair;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
@@ -13,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.jpa.AvailableHints;
+import org.hibernate.jpa.SpecHints;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class FindByPairService {
 
         TypedQuery<MMaterialDto> query = entityManager.createQuery(sql, MMaterialDto.class);
         query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
-        query.setHint(AvailableHints.HINT_SPEC_LOCK_TIMEOUT, 0);
+        query.setHint(SpecHints.HINT_SPEC_LOCK_TIMEOUT, 0);
         return query.getResultList();
     }
 

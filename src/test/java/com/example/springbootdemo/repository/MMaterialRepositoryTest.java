@@ -1,6 +1,7 @@
 package com.example.springbootdemo.repository;
 
-import com.example.springbootdemo.entity.MMaterial;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.MMaterial;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.MMaterialRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

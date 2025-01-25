@@ -1,9 +1,9 @@
 package com.example.springbootdemo.main;
 
-import com.example.springbootdemo.entity.MMaterial;
-import com.example.springbootdemo.entity.MMaterialByVendor;
-import com.example.springbootdemo.entity.MMaterialByVendor_;
-import com.example.springbootdemo.entity.MMaterial_;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.MMaterial;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.MMaterialByVendor;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.MMaterialByVendor_;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.MMaterial_;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Tuple;
 import jakarta.persistence.TypedQuery;
@@ -13,7 +13,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

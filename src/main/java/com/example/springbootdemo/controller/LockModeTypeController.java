@@ -1,7 +1,7 @@
 package com.example.springbootdemo.controller;
 
-import com.example.springbootdemo.entity.LockMode;
-import com.example.springbootdemo.repository.LockModeRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.LockMode;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.LockModeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
-import java.util.TimeZone;
 
 @RestController
 @RequestMapping(value = "/lock-mode")

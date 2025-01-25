@@ -1,7 +1,7 @@
 package com.example.springbootdemo.controller;
 
-import com.example.springbootdemo.entity.Room;
-import com.example.springbootdemo.repository.RoomRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.entity.Room;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package com.example.springbootdemo.controller;
 
 import com.example.springbootdemo.dto.AopParam;
-import com.example.springbootdemo.repository.MMaterialRepository;
+import com.example.springbootdemo.infrastructure.database.logicom.repository.MMaterialRepository;
 import com.example.springbootdemo.service.impl.AopService;
 import com.example.springbootdemo.service.impl.AopServiceImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
