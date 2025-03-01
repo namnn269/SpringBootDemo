@@ -34,7 +34,8 @@ public class MessagesConfig {
 
         Set<String> basenames = new HashSet<>();
 
-        basenames.add("ValidationMessages"); // messages in JPA
+//        basenames.add("ValidationMessages"); // messages in JPA
+        basenames.add("org.hibernate.validator.ValidationMessages"); // messages in JPA
 
         for (Resource resource : resources) {
             String path = resource.getFile().getPath();

@@ -11,7 +11,7 @@
     console.log(`START in script myview2.html`);
     const eventSource = new EventSource('/sse');
 
-    eventSource.addEventListener('message', function (event) {
+    eventSource.addEventListener('my_data', function (event) { // my_data is event name of Sse Event
         console.log('Received message: ' + event.data);
     });
 

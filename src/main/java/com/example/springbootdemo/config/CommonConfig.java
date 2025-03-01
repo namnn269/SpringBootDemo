@@ -1,6 +1,7 @@
 package com.example.springbootdemo.config;
 
 import com.example.springbootdemo.config.return_type.ReturnTypeHandler;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
+@AllArgsConstructor
 public class CommonConfig {
 
     @Autowired
@@ -20,7 +22,7 @@ public class CommonConfig {
         handlers = new ArrayList<>(handlers != null ? handlers : new ArrayList<>());
         List<HttpMessageConverter<?>> messageConverters = adapter.getMessageConverters();
         ReturnTypeHandler returnTypeHandler = new ReturnTypeHandler(messageConverters, new ContentNegotiationManager());
-        handlers.add(0, returnTypeHandler);
+        handlers.addFirst(returnTypeHandler);
         adapter.setReturnValueHandlers(handlers);
     }
 }

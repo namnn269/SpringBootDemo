@@ -1,6 +1,5 @@
 package com.example.springbootdemo.utils;
 
-import com.example.springbootdemo.main.Main;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

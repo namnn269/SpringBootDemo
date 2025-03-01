@@ -2,6 +2,7 @@ package com.example.springbootdemo.config.serializer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -19,7 +20,7 @@ public class JacksonConfig implements WebMvcConfigurer {
 
     public static ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
-        SimpleModule simpleModule = new SimpleModule();
+        JavaTimeModule simpleModule = new JavaTimeModule();
         simpleModule.setSerializerModifier(new CustomBeanSerializerModifier());
         objectMapper.registerModule(simpleModule);
         return objectMapper;
